@@ -1,5 +1,5 @@
-# 3-Electrobox-Electronics-Store
-# Live Demo : https://abduljaleel-electrobox.netlify.app/
+# Victor Gathecha - Electrobox Electronics Store
+# Live Demo : https://victor-gathecha-electrobox.netlify.app/
 
 ## Project setup
 ```

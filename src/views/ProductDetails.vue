@@ -20,12 +20,12 @@
         <div class="price">
           <span style="font-weight: bold">
             {{
-              `$${Math.floor(
+              `KSH ${Math.floor(
                 product.price - (product.price * product.discount) / 100
               )}.00 `
             }}</span
           >
-          <span class="price-num"> {{ `$${product.price}.00` }}</span>
+          <span class="price-num"> {{ `KSH ${product.price}.00` }}</span>
         </div>
         <p class="description">
           Elegant and comfy, this embroidered A-line dress which has a round
@@ -80,7 +80,8 @@
           >
             Total
           </span>
-          : ${{
+          : KSH
+          {{
             Math.floor(
               product.price - (product.price * product.discount) / 100
             ) * product.count
@@ -130,7 +131,7 @@
                         View My Cart ({{ this.$store.state.cartTotal }})
                       </button>
                     </router-link>
-                    <router-link class="checkout" to="/Profile-Page">
+                    <router-link class="checkout" to="/checkout">
                       <button data-bs-dismiss="modal" aria-label="Close">
                         BUY IT NOW
                       </button>
@@ -147,9 +148,7 @@
               </div>
             </div>
           </div>
-          <router-link class="checkout" to="/Profile-Page">
-            CHECKOUT
-          </router-link>
+          <router-link class="checkout" to="/checkout"> CHECKOUT</router-link>
         </div>
         <div class="product-options">
           <div class="fav" @click="toggleFavourite(product)">

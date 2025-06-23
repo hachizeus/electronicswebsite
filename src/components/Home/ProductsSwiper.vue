@@ -19,7 +19,7 @@
       :navigation="{ nextEl: '.products-next', prevEl: '.products-prev' }"
     >
       <SwiperSlide v-for="product in products" :key="product.id">
-        <div class="card">
+        <div class="card" @click="navigateToProduct(product)">
           <div class="img-holder flex-center">
             <div class="imgs" style="cursor: pointer">
               <img
@@ -48,12 +48,12 @@
             <div class="price">
               <span style="font-weight: bold">
                 {{
-                  `$${Math.floor(
+                  `KSH ${Math.floor(
                     product.price - (product.price * product.discount) / 100
                   )}.00 `
                 }}</span
               >
-              <span class="price-num"> {{ `$${product.price}.00` }}</span>
+              <span class="price-num"> {{ `KSH ${product.price}.00` }}</span>
             </div>
             <div class="buy">
               <button
@@ -142,7 +142,7 @@
                   VIEW MY CART ({{ this.$store.state.cartTotal }})
                 </button>
               </router-link>
-              <router-link class="checkout" to="/profile-page">
+              <router-link class="checkout" to="/checkout">
                 <button data-bs-dismiss="modal" aria-label="Close">
                   CHECKOUT
                 </button>
@@ -306,6 +306,15 @@ export default {
         }
       });
     },
+    navigateToProduct(product) {
+      this.$router.push({
+        name: "product",
+        params: {
+          id: product.id,
+          description: product.description,
+        },
+      });
+    },
   },
   mounted() {
     window.addEventListener("resize", this.handleResize);
@@ -354,6 +363,7 @@ export default {
   .card {
     border: none;
     position: relative;
+    cursor: pointer;
     .img-holder {
       .first {
         position: absolute;

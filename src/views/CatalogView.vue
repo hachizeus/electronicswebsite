@@ -7,7 +7,7 @@
         v-for="product in catalogProducts"
         :key="product.id"
       >
-        <div class="card">
+        <div class="card" @click="navigateToProduct(product)">
           <div class="img-holder flex-center">
             <div class="imgs">
               <img
@@ -43,12 +43,12 @@
             <div class="price">
               <span style="font-weight: bold">
                 {{
-                  `$${Math.floor(
+                  `KSH ${Math.floor(
                     product.price - (product.price * product.discount) / 100
                   )}.00 `
                 }}</span
               >
-              <span class="price-num"> {{ `$${product.price}.00` }}</span>
+              <span class="price-num"> {{ `KSH ${product.price}.00` }}</span>
             </div>
             <div class="buy">
               <button
@@ -91,7 +91,7 @@
                             View My Cart ({{ this.$store.state.cartTotal }})
                           </button>
                         </router-link>
-                        <router-link class="checkout" to="/Profile-Page">
+                        <router-link class="checkout" to="/checkout">
                           <button data-bs-dismiss="modal" aria-label="Close">
                             Checkout
                           </button>
@@ -152,7 +152,24 @@ export default {
   computed: {
     ...mapState(["allProducts", "fav", "cart", "compare"]),
   },
+  watch: {
+    "$route.query.category"() {
+      this.filterByCategory();
+    },
+  },
   methods: {
+    filterByCategory() {
+      const category = this.$route.query.category;
+      if (category) {
+        this.catalogProducts = this.allProducts.filter(
+          (product) =>
+            product.title.toLowerCase().includes(category.toLowerCase()) ||
+            product.description.toLowerCase().includes(category.toLowerCase())
+        );
+      } else {
+        this.catalogProducts = this.allProducts;
+      }
+    },
     // Add Product To Cart
     addItemToCart(product) {
       let exists = false;
@@ -245,9 +262,19 @@ export default {
         ? (this.compare = JSON.parse(localStorage.getItem("compare")))
         : (this.compare = []);
     },
+    navigateToProduct(product) {
+      this.$router.push({
+        name: "product",
+        params: {
+          id: product.id,
+          description: product.description,
+        },
+      });
+    },
   },
   mounted() {
     this.catalogProducts = this.allProducts;
+    this.filterByCategory();
     // Check and Set Cart
     this.checkCartLS();
     this.setCartToLS();
@@ -301,6 +328,7 @@ export default {
       border: none;
       position: relative;
       margin-bottom: 24px;
+      cursor: pointer;
 
       .product-options {
         position: absolute;

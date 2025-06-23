@@ -34,7 +34,7 @@
             <div class="card-body">
               <ul>
                 <li v-for="(feature, i) in category.features" :key="i">
-                  <a> {{ feature }}</a>
+                  <a @click="navigateToCategory(feature)"> {{ feature }}</a>
                 </li>
               </ul>
             </div>
@@ -116,15 +116,21 @@ export default {
       ],
     };
   },
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
   methods: {
     handleResize() {
       this.window.width = window.innerWidth;
       this.window.height = window.innerHeight;
     },
-  },
-  components: {
-    Swiper,
-    SwiperSlide,
+    navigateToCategory(categoryName) {
+      this.$router.push({
+        path: "/catalog",
+        query: { category: categoryName },
+      });
+    },
   },
   mounted() {
     window.addEventListener("resize", this.handleResize);

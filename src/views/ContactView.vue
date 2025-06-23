@@ -42,9 +42,7 @@
             Francisco, CA, USA 94105
           </li>
           <li><i class="fa-solid fa-phone"></i>(+99) 0123-456-789</li>
-          <li>
-            <i class="fa-solid fa-envelope"></i>AbdulJaleelSaeed1997@gmail.com
-          </li>
+          <li><i class="fa-solid fa-envelope"></i>victor.gathecha@gmail.com</li>
           <li><i class="fa-solid fa-clock"></i>Monday – Friday 10 AM – 8 PM</li>
         </ul>
       </div>

@@ -61,6 +61,14 @@ const routes = [
     },
   },
   {
+    name: "checkout",
+    path: "/checkout",
+    component: () => import("@/views/CheckoutView.vue"),
+    meta: {
+      title: "Electbox - Checkout",
+    },
+  },
+  {
     name: "wishlist",
     path: "/wishlist",
     component: () => import("@/components/Wishlist/WishlistView.vue"),
